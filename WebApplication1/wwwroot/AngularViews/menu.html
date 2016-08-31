@@ -1,0 +1,58 @@
+﻿<h2>Menu for {{model.dayOfTheWeek}}</h2>
+
+<div class="col-xs-12">
+    <table class="table table-striped" id="MenuItemsTable" >
+        <tr>
+            <th class="col-xs-3">Name of the meal</th>
+            <th class="col-xs-1">Price</th>
+            <th class="col-xs-2">Category</th>
+            <th class="col-xs-6"></th>
+        </tr>
+        <tr ng-repeat="item in model.menu.Items">
+            <td class="col-xs-3">{{item.Meal.Name }}</td>
+            <td class="col-xs-1">{{item.Meal.Price }}</td>
+            <td class="col-xs-2">{{item.Meal.Category.Name }}</td>
+            <td class="col-xs-6">
+                <div class="col-xs-8">
+                    <div class="btn-group glupi-bootstrap-ne-razume-vertical-align">
+                        <button onfocus="this.blur();" ng-class="['btn', 'btn-primary',{'active': item.Breakfast}]" ng-mousedown="model.changeStateOfMeal(item, 'breakfast');">
+                            <span>Breakfast</span>
+                        </button>
+                        <button onfocus="this.blur();" ng-class="['btn', 'btn-primary',{'active': item.Lunch}]" ng-mousedown="model.changeStateOfMeal(item, 'lunch');">
+                            <span>Lunch</span>
+                        </button>
+                        <button onfocus="this.blur();" ng-class="['btn', 'btn-primary',{'active': item.Dinner}]" ng-mousedown="model.changeStateOfMeal(item, 'dinner');">
+                            <span> Dinner </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <button id="RemoveMealButton" onfocus="this.blur();" ng-click="model.removeFromMenu(item)">
+                        <i class="fa fa-minus fa-2x" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div ng-show="model.meals.length>0">
+    <div class="col-xs-6">
+        <div class="dropdown">
+            <button style="width:100%;" class="btn btn-default dropdow-toggle" type="button" id="MealsAddDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {{model.selectedDropdownMealName}}
+                <i class="fa fa-caret-down" aria-hidden="true" id="MenuDropdownMeal"></i>
+            </button>
+            <ul class="dropdown-menu" style="width:100%">
+                <li><a href="#" ng-click="model.MealsDropdownSelect(null)"> - Select item - </a></li>
+                <li ng-repeat="item in model.meals"><a href="#" ng-click="model.MealsDropdownSelect(item)">{{item.Name}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <button id="AddMealButton" ng-disabled="model.selectedDropdownMeal == null" ng-click="model.addMealToMenu(model.selectedDropdownMeal)">
+            <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+

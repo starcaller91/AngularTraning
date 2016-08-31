@@ -1,0 +1,7 @@
+﻿<input type="text" ng-model="model.id" />
+<input type="text" value="{{model.id}}" />
+{{model.id}}
+
+<h3>Table: {{model.order}}</h3>
+
+<add-item-to-order tableid="model.id" add-item="model.addItem(model.order, value)"></add-item-to-order>
